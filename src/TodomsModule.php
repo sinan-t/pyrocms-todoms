@@ -24,6 +24,15 @@ class TodomsModule extends Module
      *
      * @var array
      */
-    protected $sections = [];
+    protected $sections = [
+        'todoms' => [
+          'buttons' => [
+            'create' => [
+              'text' => 'Add todo'
+            ]
+          ]
+        ]
+
+    ];
 
 }

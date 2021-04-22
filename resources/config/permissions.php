@@ -1,3 +1,9 @@
 <?php
 
-return [];
+return [
+    'todoms' => [
+        'read',
+        'write',
+        'delete',
+    ],
+];

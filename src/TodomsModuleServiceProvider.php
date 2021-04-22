@@ -1,6 +1,10 @@
 <?php namespace Sinant\TodomsModule;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Sinant\TodomsModule\Todom\Contract\TodomRepositoryInterface;
+use Sinant\TodomsModule\Todom\TodomRepository;
+use Anomaly\Streams\Platform\Model\Todoms\TodomsTodomsEntryModel;
+use Sinant\TodomsModule\Todom\TodomModel;
 use Illuminate\Routing\Router;
 
 class TodomsModuleServiceProvider extends AddonServiceProvider
@@ -39,7 +43,17 @@ class TodomsModuleServiceProvider extends AddonServiceProvider
      *
      * @type array|null
      */
-    protected $routes = [];
+    protected $routes = [
+      // todo here i should add routes for users
+
+      'todoms'           => 'Sinant\TodomsModule\Http\Controller\TodomsController@index',
+      'todoms/create'    => 'Sinant\TodomsModule\Http\Controller\TodomsController@create',
+      // 'todoms/edit/{id}' => 'Sinant\TodomsModule\Http\Controller\Admin\TodomsController@edit',
+
+      'admin/todoms'           => 'Sinant\TodomsModule\Http\Controller\Admin\TodomsController@index',
+      'admin/todoms/create'    => 'Sinant\TodomsModule\Http\Controller\Admin\TodomsController@create',
+      'admin/todoms/edit/{id}' => 'Sinant\TodomsModule\Http\Controller\Admin\TodomsController@edit',
+    ];
 
     /**
      * The addon middleware.
@@ -93,14 +107,18 @@ class TodomsModuleServiceProvider extends AddonServiceProvider
      *
      * @type array|null
      */
-    protected $bindings = [];
+    protected $bindings = [
+        TodomsTodomsEntryModel::class => TodomModel::class,
+    ];
 
     /**
      * The addon singleton bindings.
      *
      * @type array|null
      */
-    protected $singletons = [];
+    protected $singletons = [
+        TodomRepositoryInterface::class => TodomRepository::class,
+    ];
 
     /**
      * Additional service providers.
